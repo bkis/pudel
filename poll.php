@@ -147,7 +147,13 @@
 			foreach ($comments as $comment) {
 				echo "<div class='comment-container'>";
 				echo "<span class='comment-name'>" . $comment["name"] . "</span>";
-				echo "<div class='comment-date'>" . $comment["date"] . "</div>";
+				echo "<div class='comment-date'>" . $comment["date"];
+				if (strcmp($dbadmid, $admid) == 0) {
+					$comname = $comment["name"];
+					$comdate = $comment["date"];
+					echo " | <div class='comment-delete' data-poll='$id' data-comname='$comname' data-comdate='$comdate' poll-admid='$admid'></div>";
+				}
+				echo "</div>";
 				echo "<div class='comment-text'>" . nl2br($comment["text"]) . "</div>";
 				echo "</div>";
 			}
@@ -215,6 +221,15 @@
 			if (confirm("<?php echo SPR_DELETE_POLL_CONFIRM ?>")){
 				$.post( "delete-poll.php", { poll: "<?php echo $id ?>", adm: "NA" } ).done( function() {
 					location.href = "index.php";
+				});
+			}
+		});
+
+		//delete comment button functionality
+		$(".comment-delete").click(function(){
+			if (confirm("<?php echo SPR_DELETE_COMMENT_CONFIRM ?>")){
+				$.post( "delete-comment.php", { poll: $(this).attr("data-poll"), comname: $(this).attr("data-comname"), comdate: $(this).attr("data-comdate"), adm: $(this).attr("poll-admid") } ).done( function() {
+					location.href = location.href;
 				});
 			}
 		});
