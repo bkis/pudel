@@ -10,7 +10,7 @@
 	$dbadmid = $database->get("polls", "polladm", ["poll" => $id]);
 
 	//delete comment
-	if ($admid == $dbadmid){
+	if (strcmp($dbadmid, $admid) == 0){
 		$database->action(function($database) use ($id, $comname, $comdate) {
 			$database->delete("comments", [
 				"AND" => [

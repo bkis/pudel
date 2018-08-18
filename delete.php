@@ -9,7 +9,7 @@
 	$dbadmid = $database->get("polls", "polladm", ["poll" => $id]);
 
 	//delete entries
-	if ($admid == $dbadmid){
+	if (strcmp($dbadmid, $admid) == 0){
 		$database->action(function($database) use ($id, $name) {
 			$database->delete("entries", [
 				"AND" => [

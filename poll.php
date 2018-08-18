@@ -87,7 +87,7 @@
 				}
 			}
 
-			if (strcmp($dbadmid, $admid) == 0){
+			if (strcmp($dbadmid, $admid) == 0) {
 				echo "<td class='schedule-delete' data-poll='$id' data-name='$pName' poll-admid='$admid'>";
 			}
 
@@ -100,6 +100,11 @@
 	<tr class="schedule-new valign-middle">
 		<form action="entry.php" method="post">
 			<input type="hidden" name="poll" value="<?php echo $id ?>"/>
+      <?php
+			  if (strcmp($dbadmid, $admid) == 0) {
+				  echo "<input type='hidden' name='polladm' value='" . $admid . "'/>";
+			  }
+			?>
 			<td class="schedule-name-input">
 				<input type="text" id='name-input' name="name" maxlength="32" placeholder="<?php echo SPR_POLL_NAME ?>" required="true" />
 			</td>

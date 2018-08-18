@@ -10,7 +10,7 @@
 
 		//delete entries
 		$database->action(function($database) use ($id, $admid, $dbadmid) {
-			if ($admid == $dbadmid) {
+			if (strcmp($dbadmid, $admid) == 0) {
 				//delete from polls table
 				$database->delete("polls", ["poll" => $id]);
 
@@ -32,7 +32,7 @@
 		});
 
 		//redirect to poll
-		if ("NA" == $dbadmid) {
+		if (strcmp($dbadmid, "NA") == 0) {
 			header("Location: index.php");
 		} else {
 			header("Location: admin/index.php");
