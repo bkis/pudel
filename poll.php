@@ -16,6 +16,7 @@
 		$admid = htmlspecialchars($_GET["adm"]);
 
 	$dbadmid = $poll["polladm"];
+	$islocked = $poll["locked"];
 
 	for ($i=0; $i < sizeof($dates); $i++) {
 		//set confirmation count values
@@ -31,7 +32,20 @@
 
 	if (strcmp($dbadmid, $admid) == 0) {
 		echo "<div class='content-right'>";
+		if (strcmp($dbadmid, "NA") !== 0) {
+		  if ($islocked == 1) {
+  		  echo "<img id='btnLockPoll' src='img/icon-locked.png' alt='lock'/>&nbsp;&nbsp;&nbsp;";
+		  } else {
+			  echo "<img id='btnLockPoll' src='img/icon-unlocked.png' alt='lock'/>&nbsp;&nbsp;&nbsp;";
+		  }
+	  }
 		echo "<img id='btnDeletePoll' src='img/icon-delete-poll.png' alt='delete'/>";
+		echo "</div>";
+	}
+
+	if ($islocked == 1) {
+		echo "<div class='poll-locked'>";
+		echo SPR_POLL_LOCKED;
 		echo "</div>";
 	}
 ?>
@@ -97,30 +111,30 @@
 
 
 	<!-- NEW ENTRY -->
-	<tr class="schedule-new valign-middle">
-		<form action="entry.php" method="post">
-			<input type="hidden" name="poll" value="<?php echo $id ?>"/>
-      <?php
-			  if (strcmp($dbadmid, $admid) == 0) {
-				  echo "<input type='hidden' name='polladm' value='" . $admid . "'/>";
+	<?php
+	if ($islocked != 1 or strcmp($dbadmid, $admid) == 0) {
+  	echo "<tr class='schedule-new valign-middle'>";
+	  	echo "<form action='entry.php' method='post'>";
+		  	echo "<input type='hidden' name='poll' value='" . $id . "'/>";
+		    if (strcmp($dbadmid, $admid) == 0) {
+			    echo "<input type='hidden' name='polladm' value='" . $admid . "'/>";
+		    }
+			  echo "<td class='schedule-name-input'>";
+				  echo "<input type='text' id='name-input' name='name' maxlength='32' placeholder='" . SPR_POLL_NAME . " required='true' />";
+			  echo "</td>";
+			  foreach ($dates as $date) {
+				  echo "<td class='new-entry-box new-entry-choice-maybe'>";
+				  echo "<input class='entry-value' type='hidden' name='values[]' value='2'/>";
+				  echo "<input class='entry-date' type='hidden' name='dates[]' value='" . $date["date"] . "'/>";
+				  echo "</td>";
 			  }
-			?>
-			<td class="schedule-name-input">
-				<input type="text" id='name-input' name="name" maxlength="32" placeholder="<?php echo SPR_POLL_NAME ?>" required="true" />
-			</td>
-			<?php
-				foreach ($dates as $date) {
-					echo "<td class='new-entry-box new-entry-choice-maybe'>";
-					echo "<input class='entry-value' type='hidden' name='values[]' value='2'/>";
-					echo "<input class='entry-date' type='hidden' name='dates[]' value='" . $date["date"] . "'/>";
-					echo "</td>";
-				}
-			?>
-			<td class="schedule-submit">
-				<input type="submit" value="<?php echo SPR_ENTRY_SAVE ?>" class="save" />
-			</td>
-		</form>
-	</tr>
+			  echo "<td class='schedule-submit'>";
+				  echo "<input type='submit' value='" . SPR_ENTRY_SAVE . "' class='save' />";
+			  echo "</td>";
+		  echo "</form>";
+	  echo "</tr>";
+	}
+	?>
 
 	<!-- RESULTS -->
 	<tr class="schedule-results valign-middle">
@@ -170,26 +184,28 @@
 </div><br>
 
 <!-- COMMENTS FORM -->
-<div class="centerBox">
-	<form action="comment.php" method="post" class="sprudelform">
-		<input type="hidden" name="poll" value="<?php echo $id ?>"/>
-		<ul class="sprudelform">
-		    <li>
-		        <label><?php echo SPR_COMMENT_NAME ?> <span class="required">*</span></label>
-		        <input type="text" name="name" maxlength="32" class="field-long" required="true" />
-		    </li>
-		    <li>
-		        <label><?php echo SPR_COMMENT_TEXT ?> <span class="required">*</span></label>
-		        <textarea name="text" maxlength="512" class="field-long field-textarea" required="true"></textarea>
-		    </li>
-		    <li class="content-right">
-		        <input type="submit" value="<?php echo SPR_COMMENT_SUBMIT ?>" />
-		    </li>
-		</ul>
-	</form>
-</div><br>
-
-
+<?php
+if ($islocked != 1 or strcmp($dbadmid, $admid) == 0) {
+  echo "<div class='centerBox'>";
+	  echo "<form action='comment.php' method='post' class='sprudelform'>";
+		  echo "<input type='hidden' name='poll' value='" . $id . "'/>";
+		  echo "<ul class='sprudelform'>";
+		    echo "<li>";
+		        echo "<label>" . SPR_COMMENT_NAME . " <span class='required'>*</span></label>";
+		        echo "<input type='text' name='name' maxlength='32' class='field-long' required='true' />";
+		    echo "</li>";
+		    echo "<li>";
+		        echo "<label>" . SPR_COMMENT_TEXT . " <span class='required'>*</span></label>";
+		        echo "<textarea name='text' maxlength='512' class='field-long field-textarea' required='true'></textarea>";
+		    echo "</li>";
+		    echo "<li class='content-right'>";
+		        echo "<input type='submit' value='" . SPR_COMMENT_SUBMIT . "' />";
+		    echo "</li>";
+		  echo "</ul>";
+	  echo "</form>";
+  echo "</div><br>";
+}
+?>
 
 
 <!-- JS -->
@@ -228,6 +244,13 @@
 					location.href = "index.php";
 				});
 			}
+		});
+
+		//lock poll button functionality
+		$("#btnLockPoll").click(function(){
+			$.post( "lock-poll.php", { poll: "<?php echo $id ?>", adm: "<?php echo $admid ?>" } ).done( function() {
+				location.href = location.href;
+			});
 		});
 
 		//delete comment button functionality

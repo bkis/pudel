@@ -1,7 +1,7 @@
 <?php
 	if (isset($_POST["title"]) && strlen($_POST["title"]) > 0
 		&& isset($_POST["dates"])){
-		
+
 		require_once 'db.php';
 
 		$title = htmlspecialchars($_POST["title"]);
@@ -23,13 +23,14 @@
 				"polladm" => $idadm,
 				"title" => $title,
 				"details" => $details,
+				"locked" => 0,
 				"changed" => date("Y-m-d H:i:s")
 			]);
 		});
 
 		//prepare dates
 		$datesArr = array();
-		for ($i=0; $i < sizeof($dates); $i++) { 
+		for ($i=0; $i < sizeof($dates); $i++) {
 			array_push($datesArr, array("poll" => $id, "date" => $dates[$i], "sort" => $i));
 		}
 

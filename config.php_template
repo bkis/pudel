@@ -74,6 +74,7 @@
 	define('SPR_URL_COPY_ERROR', 'Error copying URL. Please copy it manually!');	// copy url error text
 	define('SPR_ENTRY_SAVE', 'Save');	// new entry save button text
 	define('SPR_ENTRY_ALREADY_EXISTS', 'Entry with this name already exists!');	// entry with same name already exists
+	define('SPR_POLL_LOCKED', 'This poll was locked - it is not possible to insert new entries or comments!');	// Poll was locked by the administrator
 
 	//turn on/off footer text
 	define('SPR_SHOW_FOOTER_LINK', '1');				// insert 0 if you want to remove the footer link, but it would be nice to leave it there

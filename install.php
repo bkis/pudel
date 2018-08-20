@@ -10,6 +10,7 @@
 			`polladm` varchar(32) NOT NULL,
 			`title` text NOT NULL,
 			`details` text NOT NULL,
+			`locked` TINYINT(1) NOT NULL,
 			`changed` date NOT NULL,
 			PRIMARY KEY (`poll`)
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8";

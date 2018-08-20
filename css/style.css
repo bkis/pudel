@@ -108,6 +108,10 @@ p.details {
     margin-right: 25px;
 }
 
+#btnLockPoll{
+    cursor: pointer;
+}
+
 #footer{
     text-align: center;
     margin-top: 50px;
@@ -335,6 +339,16 @@ button {
 .r-no {
     font-weight: bold;
     color: #cb4335;
+}
+
+.poll-locked {
+    color: #cb4335;
+    background-color: #F2E7E5;
+    border: thin solid #cb4335;
+    text-align: center;
+    padding: 10px;
+    margin: 10px auto 20px auto;
+    width: 50%;
 }
 
 .comment-container{
