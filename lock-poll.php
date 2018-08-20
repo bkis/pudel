@@ -8,11 +8,11 @@
 	$dbadmid = $database->get("polls", "polladm", ["poll" => $id]);
 	$islocked = $database->get("polls", "locked", ["poll" => $id]);
 
-	//delete comment
+	//lock/unlock poll
 	if (strcmp($dbadmid, $admid) == 0 and strcmp($dbadmid, "NA") !== 0){
 		$database->action(function($database) use ($id, $islocked) {
 			if ($islocked == 1) {
-			  $database->update("polls", ["locked" => 0], ["poll" => $id]);
+				$database->update("polls", ["locked" => 0], ["poll" => $id]);
 			} else {
 				$database->update("polls", ["locked" => 1], ["poll" => $id]);
 			}
