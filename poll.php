@@ -224,7 +224,7 @@
 		//delete poll button functionality
 		$("#btnDeletePoll").click(function(){
 			if (confirm("<?php echo SPR_DELETE_POLL_CONFIRM ?>")){
-				$.post( "delete-poll.php", { poll: "<?php echo $id ?>", adm: "NA" } ).done( function() {
+				$.post( "delete-poll.php", { poll: "<?php echo $id ?>", adm: "<?php echo $admid ?>" } ).done( function() {
 					location.href = "index.php";
 				});
 			}
