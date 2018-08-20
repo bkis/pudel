@@ -8,7 +8,7 @@
 
 	//// MANDATORY
 	//// You'll HAVE TO set the
-	//// following values to use Sprudel	
+	//// following values to use Sprudel
 
 	// database settings
 	define('SPR_DB_NAME', 'your_db_name');		// database name
@@ -42,12 +42,13 @@
 	define('SPR_COMMENT_NAME', 'Name');				// comment name field label
 	define('SPR_COMMENT_TEXT', 'Comment');			// comment text field label
 	define('SPR_COMMENT_SUBMIT', 'Send');				// comment submit button text
+	define('SPR_DELETE_COMMENT_CONFIRM', 'Do you really want to delete this comment?');	// confirmation text when deleting a comment
 	define('SPR_NO_JS_MSG', 'Please enable JavaScript in your browser and reload this page.');
 	define('SPR_404', 'Something went wrong...');		// poll not found page text
 	define('SPR_LIFESPAN', 'Inactive polls will be deleted automatically after n days!');		// info about how long inactive polls are stored
 																		// (leave "n" as a placeholder for the number of days - it will be replaced automatically!)
 	// new poll form strings / labels
-	define('SPR_NEW_FORM_TITLE', 'Title');			
+	define('SPR_NEW_FORM_TITLE', 'Title');
 	define('SPR_NEW_FORM_DESCRIPTION', 'Description');
 	define('SPR_NEW_FORM_ADMIN', 'Use an Admin-Link?');
 	define('SPR_NEW_FORM_DATES', 'Dates / Options');
@@ -72,6 +73,7 @@
 	define('SPR_POLL_NAME', 'Your name?');			// placeholder for name input field
 	define('SPR_URL_COPY_ERROR', 'Error copying URL. Please copy it manually!');	// copy url error text
 	define('SPR_ENTRY_SAVE', 'Save');	// new entry save button text
+	define('SPR_ENTRY_ALREADY_EXISTS', 'Entry with this name already exists!');	// entry with same name already exists
 
 	//turn on/off footer text
 	define('SPR_SHOW_FOOTER_LINK', '1');				// insert 0 if you want to remove the footer link, but it would be nice to leave it there

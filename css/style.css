@@ -245,7 +245,7 @@ select{
     border:1px solid #BEBEBE;
     padding: 2px;
     margin:0px;
-    outline: none; 
+    outline: none;
 }
 
 button {
@@ -352,6 +352,16 @@ button {
 .comment-date{
     float: right;
     color: #666;
+}
+
+.comment-delete{
+    background:url(../img/icon-delete-comment.png) no-repeat;
+    background-position: center center;
+    cursor:pointer;
+    float: right;
+    margin-left: 0.25em;
+    height: 14px;
+    width: 14px;
 }
 
 .comment-text{
