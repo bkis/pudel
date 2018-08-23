@@ -9,6 +9,11 @@
 		$dates = array_values(array_unique($_POST["dates"]));
 		$id = hash("md4", time() . $title);
 
+		$email = "";
+		if (SPR_EMAIL_AFTER_COMMENT == 1) {
+			$email = htmlspecialchars($_POST["email"]);
+		}
+
 		$idadm = "NA";
 		if (isset($_POST["adminonly"])) {
 			if (strcmp("true", $_POST["adminonly"]) == 0) {
@@ -17,13 +22,14 @@
 		}
 
 		//write data to polls table
-		$database->action(function($database) use ($id, $idadm, $title, $details) {
+		$database->action(function($database) use ($id, $idadm, $title, $details, $email) {
 			$database->insert("polls", [
 				"poll" => $id,
 				"polladm" => $idadm,
 				"title" => $title,
 				"details" => $details,
 				"locked" => 0,
+				"email" => $email,
 				"changed" => date("Y-m-d H:i:s")
 			]);
 		});
@@ -68,10 +74,17 @@
 		        <label><?php echo SPR_NEW_FORM_DESCRIPTION ?> </label>
 		        <textarea name="details" class="field-long field-textarea" placeholder="<?php echo SPR_NEW_FORM_DETAILS_PLACEHOLDER ?>"></textarea>
 		    </li>
-				<?php if (SPR_ADMIN_LINKS == 1) {
+				<?php
+				if (SPR_ADMIN_LINKS == 1) {
 						echo "<li>";
 						echo "<label>" . SPR_NEW_FORM_ADMIN . "</label>";
 						echo "<input type='checkbox' name='adminonly' value='true' id='adminInput' /> " . SPR_NEW_FORM_ADMIN_CHECKBOX;
+						echo "</li><br/>";
+				}
+				if (SPR_EMAIL_AFTER_COMMENT == 1) {
+						echo "<li>";
+						echo "<label>" . SPR_NEW_FORM_EMAIL_COMMENT . "</label>";
+						echo "<input type='text' name='email' class='field-long' placeholder=''></input>";
 						echo "</li><br/>";
 				}
 				?>

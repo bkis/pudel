@@ -27,6 +27,9 @@
 	//turn on/off admin link functionality
 	define('SPR_ADMIN_LINKS', '0');			// insert 1 if you want to enable admin links functionality
 
+	//turn on/off email for comments functionality
+	define('SPR_EMAIL_AFTER_COMMENT', '0');			// insert 1 if you want to enable the possibility to receive emails after new comment
+
 	// lifespan of inactive polls
 	define('SPR_DELETE_AFTER', '180');	//delete inactive polls after x days (daily cronjob for cleanup.php needed!)
 
@@ -42,6 +45,10 @@
 	define('SPR_COMMENT_NAME', 'Name');				// comment name field label
 	define('SPR_COMMENT_TEXT', 'Comment');			// comment text field label
 	define('SPR_COMMENT_SUBMIT', 'Send');				// comment submit button text
+	define('SPR_COMMENT_EMAIL', 'New comment in poll');				// comment email subject
+	define('SPR_COMMENT_EMAILTEXT', 'Comment from');				// comment email
+	define('SPR_COMMENT_FROM_EMAILADDRESS', 'your-email@domain.org');				// comment email from
+	define('SPR_COMMENT_EMAILLINK', 'Link to poll');				// comment email link to poll text
 	define('SPR_DELETE_COMMENT_CONFIRM', 'Do you really want to delete this comment?');	// confirmation text when deleting a comment
 	define('SPR_NO_JS_MSG', 'Please enable JavaScript in your browser and reload this page.');
 	define('SPR_404', 'Something went wrong...');		// poll not found page text
@@ -55,6 +62,7 @@
 	define('SPR_NEW_FORM_TITLE_PLACEHOLDER', 'What about a title for your poll?');
 	define('SPR_NEW_FORM_DETAILS_PLACEHOLDER', 'Your participants may also like a short description of what this poll is all about, right?');
 	define('SPR_NEW_FORM_ADMIN_CHECKBOX', 'Editing/deleting poll only with admin link');
+	define('SPR_NEW_FORM_EMAIL_COMMENT', 'If you want to receive an email as soon as a comment was written, please enter your email address:');
 	define('SPR_NEW_FORM_DATES_PLACEHOLDER', 'Type what you want or pick a date with the calendar button!');
 	define('SPR_NEW_FORM_SUBMIT', 'Create');
 

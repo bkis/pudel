@@ -20,6 +20,7 @@ Sprudel is meant to be easy to use and offers all the relevant features you need
 - one-click copying of the poll URL
 - optional admin link functionality to keep participants from editing/deleting the poll
 - optional poll administration interface for managing all the polls on the server
+- optional receive an email after new comment was written
 
 # Requirements
 - PHP 5.4 or higher  
