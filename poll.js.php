@@ -45,7 +45,7 @@
         // delete poll button functionality
         $("#ctrl-delete-poll").click(function(){
             if (confirm("<?php echo SPR_DELETE_POLL_CONFIRM ?>")){
-                $.post( "poll.delete.php", { pollId: "<?php echo $poll->getId() ?>", adm: "<?php echo $poll->getAdminId() ?>" } ).done( function() {
+                $.post( "poll.delete.php", { pollId: $(this).attr("data-poll"), adm: $(this).attr("data-adminid") } ).done( function() {
                     location.href = "index.php";
                 });
             }

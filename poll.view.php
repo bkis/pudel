@@ -11,7 +11,7 @@
 		</button>
 		<!-- DELETE POLL BUTTON -->
 		<?php if (strcmp($poll->getAdminId(), $adminId) == 0) { ?>
-			<button id="ctrl-delete-poll" type="button">
+			<button id="ctrl-delete-poll" type="button" data-poll="<?php echo $poll->getId() ?>" data-adminid="<?php echo $adminId ?>">
 				<?php echo SPR_POLL_CONTROL_DELETE ?>
 			</button>
 		<?php } ?>
